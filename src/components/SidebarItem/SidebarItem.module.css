@@ -1,0 +1,45 @@
+.button {
+  color: var(--dark-bg);
+  background: var(--green);
+  border: none;
+  display: flex;
+  justify-content: flex-start;
+  gap: 16px;
+  padding-left: 24px;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 250ms ease;
+  overflow: hidden;
+}
+
+.icon {
+  display: inline;
+  flex-shrink: 0.3;
+}
+
+.button:hover {
+  background: var(--green-light);
+}
+
+.wrapper {
+  width: 80%;
+  display: flex;
+}
+
+.text {
+  white-space: nowrap;
+}
+
+.gray {
+  background: var(--gray);
+  color: black;
+}
+
+.gray:hover {
+  background: var(--gray-lighter);
+  color: black;
+}

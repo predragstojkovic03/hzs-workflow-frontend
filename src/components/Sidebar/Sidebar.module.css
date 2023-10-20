@@ -1,0 +1,35 @@
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 100%;
+  color: white;
+  background-color: var(--dark-accent);
+  padding: 16px 0;
+  gap: 16px;
+
+  z-index: 1000;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: 100%;
+  gap: 16px;
+}
+
+.logoutItemWrapper {
+  width: 100%;
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+}

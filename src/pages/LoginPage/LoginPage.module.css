@@ -1,0 +1,26 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 350px;
+  padding: 16px 24px;
+  border-radius: 15px;
+
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+
+  background: rgba(0, 0, 0, 0.2);
+  transition: all 250ms ease;
+}
+
+.errorMessage {
+  font-weight: 200;
+  font-size: 0.85rem;
+  color: var(--red-accent-lighter);
+}
+
+@media only screen and (max-width: 480px) {
+  .form {
+    background: transparent;
+    box-shadow: none;
+  }
+}

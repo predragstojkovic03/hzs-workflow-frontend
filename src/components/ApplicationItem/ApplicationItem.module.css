@@ -1,0 +1,32 @@
+.wrapper {
+  padding: 14px 16px;
+  width: max-content;
+  background: var(--dark-accent);
+  border-radius: 10px;
+  /* box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 8px 0px; */
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.element {
+  padding: 8px;
+  background: #2b2b2b;
+  border-radius: 8px;
+  font-weight: 300;
+}
+
+.points {
+  background: var(--purple);
+  font-weight: 500;
+}
+
+.name {
+  cursor: pointer;
+}
+
+@media (max-width: 425px) {
+  .element {
+    font-size: 0.8rem;
+  }
+}
