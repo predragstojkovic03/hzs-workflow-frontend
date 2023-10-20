@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { IoStatsChart } from 'react-icons/io5';
-import { BsPeopleFill } from 'react-icons/bs';
-import { BsCheckLg } from 'react-icons/bs';
+// import { IoStatsChart } from 'react-icons/io5';
+// import { BsPeopleFill } from 'react-icons/bs';
+// import { BsCheckLg } from 'react-icons/bs';
 import { FaHome } from 'react-icons/fa';
-import { IoMdDoneAll } from 'react-icons/io';
+// import { IoMdDoneAll } from 'react-icons/io';
 import { BiUser } from 'react-icons/bi';
-import { AiFillStar } from 'react-icons/ai';
+// import { AiFillStar } from 'react-icons/ai';
 import { motion } from 'framer-motion';
 
 import SidebarItem from '../SidebarItem/SidebarItem';
