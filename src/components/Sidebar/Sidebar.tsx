@@ -62,15 +62,15 @@ const Sidebar = () => {
     );
   };
 
-  const isLog = () => {
-    return (
-      user.data && (user.data.role === 'log' || user.data.role === 'superuser')
-    );
-  };
+  // const isLog = () => {
+  //   return (
+  //     user.data && (user.data.role === 'log' || user.data.role === 'superuser')
+  //   );
+  // };
 
-  const isSuperuser = () => {
-    return user.data && user.data.role === 'superuser';
-  };
+  // const isSuperuser = () => {
+  //   return user.data && user.data.role === 'superuser';
+  // };
 
   useEffect(() => {
     setIsOpen(false);

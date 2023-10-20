@@ -11,7 +11,7 @@ import styles from './LoginPage.module.css';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import { Navigate } from 'react-router';
-import { ScaleLoader } from 'react-spinners';
+// import { ScaleLoader } from 'react-spinners';
 import { LoginCredentials } from '../../entities/interfaces';
 
 const schema = yup
