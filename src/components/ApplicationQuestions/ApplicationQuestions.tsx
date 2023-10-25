@@ -1,9 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import React, { useState } from 'react';
-import {
-  getApplicationById,
-  gradeApplication,
-} from '../../lib/api/applications';
+import { useState } from 'react';
+import { gradeApplication } from '../../lib/api/applications';
 
 import styles from './ApplicationQuestions.module.css';
 import ApplicationQuestion from '../ApplicationQuestion/ApplicationQuestion';

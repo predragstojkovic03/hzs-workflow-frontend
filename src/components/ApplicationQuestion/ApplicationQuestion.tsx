@@ -1,7 +1,4 @@
-import { useState } from 'react';
-import Input from '../Input/Input';
 import Button from '../Button/Button';
-import { useQueryClient } from '@tanstack/react-query';
 import { ScaleLoader } from 'react-spinners';
 
 interface ApplicationQuestionProps {
