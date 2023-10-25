@@ -38,6 +38,7 @@ interface Application {
     situational: number;
     goals: number;
     teamMembersDescription: number;
+    gradeSum: number;
   };
   comments?: {
     primaryComment?: string;

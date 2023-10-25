@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { useUser } from '../../lib/auth';
 import { ScaleLoader } from 'react-spinners';
 
-import { getApplicationById } from '../../lib/api/applications';
+import { getApplicationById, setGradeStatus } from '../../lib/api/applications';
 
 import styles from './ApplicationDetailsPage.module.css';
 import Button from '../../components/Button/Button';
@@ -15,9 +15,17 @@ const ApplicationDetailsPage = () => {
   const { id } = useParams();
   const user = useUser();
 
+  const queryClient = useQueryClient();
+
   const applicationQuery = useQuery({
     queryKey: ['applications', id],
     queryFn: () => getApplicationById(id, user.data),
+  });
+
+  const applicationMutation = useMutation({
+    mutationKey: ['application', id],
+    mutationFn: setGradeStatus,
+    onSettled: () => queryClient.invalidateQueries(['applications', id]),
   });
 
   if (applicationQuery.isLoading) {
@@ -45,7 +53,30 @@ const ApplicationDetailsPage = () => {
         <span className={styles.teamName}>
           {applicationQuery.data.teamName}
         </span>
-        <Button>Oceni prijavu</Button>
+        <Button
+          styleType={applicationQuery.data.grades.graded && 'secondary'}
+          onClick={() =>
+            applicationMutation.mutate({
+              id,
+              graded: !applicationQuery.data.grades.graded,
+              userData: user.data,
+            })
+          }
+        >
+          {applicationMutation.isLoading ? (
+            <ScaleLoader
+              color='var(--dark-bg)'
+              height={12}
+              margin={1}
+              loading
+              radius={5}
+            />
+          ) : applicationQuery.data.grades.graded ? (
+            'Ocenjeno'
+          ) : (
+            'Oceni prijavu'
+          )}
+        </Button>
       </div>
       <div className={styles.info}>
         <MemberInfo

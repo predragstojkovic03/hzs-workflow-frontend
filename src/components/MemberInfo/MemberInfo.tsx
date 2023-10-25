@@ -7,7 +7,7 @@ interface MemberInfoProps {
   captain?: boolean;
 }
 
-const MemberInfo = ({ teamMember, captain }: MemberInfoProps) => {
+const MemberInfo: React.FC<MemberInfoProps> = ({ teamMember, captain }) => {
   const getYearOfStudy = (yearOfStudy: string) => {
     switch (yearOfStudy) {
       case 'i':
