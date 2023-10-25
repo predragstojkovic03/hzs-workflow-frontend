@@ -1,0 +1,38 @@
+.wrapper {
+  margin-top: 32px;
+}
+
+.heading {
+  border-bottom: 1px solid var(--green);
+  width: fit-content;
+
+  font-size: 1.6rem;
+  font-weight: 600;
+
+  margin-bottom: 24px;
+}
+
+.questionText {
+  font-size: 1.3rem;
+  border-bottom: 1px solid var(--green-light);
+  margin-bottom: 8px;
+
+  width: fit-content;
+}
+
+.questionBody {
+  padding: 8px;
+  background: #ffffff0e;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.gradeForm {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.gradeForm input {
+  max-width: 100%;
+}

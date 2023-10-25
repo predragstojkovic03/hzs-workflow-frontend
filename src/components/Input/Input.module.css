@@ -4,13 +4,16 @@
   justify-content: flex-start;
   width: 100%;
   align-items: flex-start;
+
+  gap: 8px;
 }
 
 .input {
   border: 1px solid #ffffff57;
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: 8px 12px;
+  border-radius: 6px;
   width: 100%;
+  color: #fff;
 
   background: #ffffff1f;
 

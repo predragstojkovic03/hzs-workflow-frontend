@@ -1,0 +1,31 @@
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: var(--dark-accent);
+
+  border-bottom: 3px solid var(--green-light);
+  border-radius: 6px;
+
+  padding: 12px;
+
+  position: relative;
+  z-index: 10;
+
+  /* position: fixed; */
+  /* width: 90%; */
+}
+
+.teamName {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.info {
+  margin-top: 24px;
+
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}

@@ -5,6 +5,7 @@ import RequireAuth from './pages/RequireAuth/RequireAuth';
 import Home from './pages/Home/Home';
 import { useUser } from './lib/auth';
 import Sidebar from './components/Sidebar/Sidebar';
+import ApplicationDetails from './pages/ApplicationDetailsPage/ApplicationDetailsPage';
 
 function App() {
   const user = useUser();
@@ -14,6 +15,7 @@ function App() {
       <Router>
         {user.data && <Sidebar />}
         <Routes>
+          <Route path='/login' element={<LoginPage />} />
           <Route
             path='/'
             element={
@@ -22,7 +24,14 @@ function App() {
               </RequireAuth>
             }
           />
-          <Route path='/login' element={<LoginPage />} />
+          <Route
+            path='/prijave/:id'
+            element={
+              <RequireAuth>
+                <ApplicationDetails />
+              </RequireAuth>
+            }
+          />
         </Routes>
       </Router>
     </main>

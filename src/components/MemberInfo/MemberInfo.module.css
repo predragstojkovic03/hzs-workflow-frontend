@@ -1,0 +1,42 @@
+.wrapper {
+  background: var(--dark-accent);
+  padding: 16px 24px;
+  width: fit-content;
+  border-radius: 12px 20px;
+
+  border: 1px solid var(--gray);
+}
+
+.captain {
+  box-shadow: 0px 0px 24px 0px rgba(45, 255, 196, 0.18);
+
+  border: 1px solid var(--green);
+}
+
+.icon {
+  width: fit-content;
+
+  color: var(--white-smoke);
+  margin: 0 auto;
+  font-size: 2rem;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.captain .icon {
+  color: var(--dark-accent);
+  background: var(--green);
+}
+
+.element {
+  margin-bottom: 8px;
+}
+
+.element span {
+  font-weight: 600;
+}
