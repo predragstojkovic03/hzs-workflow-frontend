@@ -1,24 +1,36 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  UseQueryResult,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { useState } from 'react';
 import { gradeApplication } from '../../lib/api/applications';
 
 import styles from './ApplicationQuestions.module.css';
 import ApplicationQuestion from '../ApplicationQuestion/ApplicationQuestion';
+import { UserData } from '../../entities/interfaces';
+
+interface ApplicationQuestionsProps {
+  applicationQuery: UseQueryResult<Application, unknown>;
+  applicationId: string;
+  userData: UserData;
+}
 
 const ApplicationQuestions = ({
   applicationQuery,
   applicationId,
   userData,
-}: any) => {
+}: ApplicationQuestionsProps) => {
   const [grades, setGrades] = useState({
-    experience: applicationQuery.data.grades.experience,
-    technologies: applicationQuery.data.grades.technologies,
-    whyYou: applicationQuery.data.grades.whyYou,
-    situational: applicationQuery.data.grades.situational,
-    goals: applicationQuery.data.grades.goals,
-    teamMembersDescription: applicationQuery.data.grades.teamMembersDescription,
-    moodle: applicationQuery.data.grades.moodle,
-    workshop: applicationQuery.data.grades.workshop,
+    experience: applicationQuery.data?.grades.experience,
+    technologies: applicationQuery.data?.grades.technologies,
+    whyYou: applicationQuery.data?.grades.whyYou,
+    situational: applicationQuery.data?.grades.situational,
+    goals: applicationQuery.data?.grades.goals,
+    teamMembersDescription:
+      applicationQuery.data?.grades.teamMembersDescription,
+    moodle: applicationQuery.data?.grades.moodle,
+    workshop: applicationQuery.data?.grades.workshop,
   });
 
   const queryClient = useQueryClient();
@@ -36,11 +48,7 @@ const ApplicationQuestions = ({
 
       <ApplicationQuestion
         text='Experience'
-        body={
-          applicationQuery.data.experience.have
-            ? applicationQuery.data.experience.desc
-            : 'Nema prethodnog iskustva'
-        }
+        body={applicationQuery.data?.experience}
         setGrades={setGrades}
         grades={grades}
         stateKey='experience'
@@ -52,11 +60,7 @@ const ApplicationQuestions = ({
 
       <ApplicationQuestion
         text='Technologies'
-        body={
-          applicationQuery.data.experience.have
-            ? applicationQuery.data.experience.desc
-            : 'Nema prethodnog iskustva'
-        }
+        body={applicationQuery.data?.technologies}
         setGrades={setGrades}
         grades={grades}
         stateKey='technologies'
@@ -68,11 +72,7 @@ const ApplicationQuestions = ({
 
       <ApplicationQuestion
         text='Why You'
-        body={
-          applicationQuery.data.experience.have
-            ? applicationQuery.data.experience.desc
-            : 'Nema prethodnog iskustva'
-        }
+        body={applicationQuery.data?.whyYou}
         setGrades={setGrades}
         grades={grades}
         stateKey='whyYou'
@@ -84,11 +84,7 @@ const ApplicationQuestions = ({
 
       <ApplicationQuestion
         text='Situational'
-        body={
-          applicationQuery.data.experience.have
-            ? applicationQuery.data.experience.desc
-            : 'Nema prethodnog iskustva'
-        }
+        body={applicationQuery.data?.situational}
         setGrades={setGrades}
         grades={grades}
         stateKey='situational'
@@ -99,11 +95,7 @@ const ApplicationQuestions = ({
       />
       <ApplicationQuestion
         text='Goals'
-        body={
-          applicationQuery.data.experience.have
-            ? applicationQuery.data.experience.desc
-            : 'Nema prethodnog iskustva'
-        }
+        body={applicationQuery.data?.goals}
         setGrades={setGrades}
         grades={grades}
         stateKey='teamMembersDescription'
@@ -114,11 +106,7 @@ const ApplicationQuestions = ({
       />
       <ApplicationQuestion
         text='Moodle'
-        body={
-          applicationQuery.data.experience.have
-            ? applicationQuery.data.experience.desc
-            : 'Nema prethodnog iskustva'
-        }
+        body='Moodle test'
         setGrades={setGrades}
         grades={grades}
         stateKey='moodle'
@@ -129,11 +117,7 @@ const ApplicationQuestions = ({
       />
       <ApplicationQuestion
         text='Workshop'
-        body={
-          applicationQuery.data.experience.have
-            ? applicationQuery.data.experience.desc
-            : 'Nema prethodnog iskustva'
-        }
+        body={'Radionice'}
         setGrades={setGrades}
         grades={grades}
         stateKey='workshop'

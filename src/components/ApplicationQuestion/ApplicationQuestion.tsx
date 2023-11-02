@@ -3,7 +3,7 @@ import { ScaleLoader } from 'react-spinners';
 
 interface ApplicationQuestionProps {
   text: string;
-  body: string;
+  body?: string;
   styles: CSSModuleClasses;
   onClick: any;
   setGrades: React.Dispatch<any>;

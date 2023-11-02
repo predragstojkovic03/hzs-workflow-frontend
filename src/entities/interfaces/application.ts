@@ -21,10 +21,7 @@ interface Application {
   fourthMember?: TeamMember;
   teamName: string;
   leadSource: string[];
-  experience: {
-    have: boolean;
-    desc?: string;
-  };
+  experience: string;
   technologies: string;
   whyYou: string;
   situational: string;
@@ -39,6 +36,8 @@ interface Application {
     goals: number;
     teamMembersDescription: number;
     gradeSum: number;
+    moodle: number;
+    workshop: number;
   };
   comments?: {
     primaryComment?: string;
