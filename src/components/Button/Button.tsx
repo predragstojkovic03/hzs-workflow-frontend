@@ -6,6 +6,7 @@ interface ButtonProps {
   children: React.ReactNode;
   onClick?: (e: any) => any;
   disabled?: boolean;
+  fullWidth?: boolean;
 }
 
 const Button = ({
@@ -14,13 +15,14 @@ const Button = ({
   children,
   onClick,
   disabled,
+  fullWidth,
 }: ButtonProps) => {
   return (
     <button
       onClick={onClick}
       className={`${styles.button} ${disabled ? styles.disabled : ''} ${
         styleType === 'secondary' ? styles.secondary : ''
-      }`}
+      } ${fullWidth && styles.fullWidth}`}
       type={type}
       disabled={disabled}
     >

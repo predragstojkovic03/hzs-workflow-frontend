@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 
 import styles from './ApplicationItem.module.css';
+import { useNavigate } from 'react-router-dom';
 
 interface ApplicationItemProps {
+  _id: any;
   position: number;
   teamName: string;
   captainName: string;
@@ -18,13 +20,16 @@ const spring = {
 };
 
 const ApplicationItem = ({
+  _id,
   position,
   teamName,
   captainName,
-  // captainEmail,
+  captainEmail,
   captainPhone,
   points = '/',
 }: ApplicationItemProps) => {
+  const navigate = useNavigate();
+
   return (
     <motion.div
       layout
@@ -34,7 +39,12 @@ const ApplicationItem = ({
       className={styles.wrapper}
     >
       <div className={styles.element}>#{position}</div>
-      <div className={styles.element}>{teamName}</div>
+      <div
+        onClick={() => navigate(`/prijave/${_id}`)}
+        className={`${styles.element} ${styles.teamName}`}
+      >
+        {teamName}
+      </div>
       <div
         // onClick={handleNameClick}
         className={`${styles.element} ${styles.name}`}
@@ -42,6 +52,7 @@ const ApplicationItem = ({
         {captainName}
       </div>
       <div className={styles.element}>{captainPhone}</div>
+      <div className={styles.element}>{captainEmail}</div>
       <div className={`${styles.element} ${styles.points}`}>{points} poena</div>
     </motion.div>
   );

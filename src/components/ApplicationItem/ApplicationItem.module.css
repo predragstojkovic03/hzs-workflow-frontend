@@ -21,9 +21,14 @@
   font-weight: 500;
 }
 
-.name {
+.teamName {
+  text-decoration: underline;
   cursor: pointer;
 }
+
+/* .name {
+  cursor: pointer;
+} */
 
 @media (max-width: 425px) {
   .element {

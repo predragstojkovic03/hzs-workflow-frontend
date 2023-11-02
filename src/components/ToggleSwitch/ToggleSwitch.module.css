@@ -1,0 +1,33 @@
+.container {
+  position: relative;
+  width: 50px;
+  height: 30px;
+  background: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all 250ms ease;
+}
+
+.circle {
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+  transition: all 250ms ease;
+}
+
+.container.active {
+  background: var(--green);
+  border-color: #14a44d;
+}
+
+.container.active .circle {
+  left: calc(100% - 28px);
+}

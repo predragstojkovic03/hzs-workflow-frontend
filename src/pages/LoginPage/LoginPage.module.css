@@ -6,15 +6,20 @@
   padding: 16px 24px;
   border-radius: 15px;
 
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
 
   background: rgba(0, 0, 0, 0.2);
   transition: all 250ms ease;
 }
 
+.form button {
+  margin-top: 16px;
+}
+
 .errorMessage {
   font-weight: 200;
   font-size: 0.85rem;
+  text-align: center;
   color: var(--red-accent-lighter);
 }
 
