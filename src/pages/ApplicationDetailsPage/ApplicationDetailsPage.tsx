@@ -54,7 +54,9 @@ const ApplicationDetailsPage = () => {
           {applicationQuery.data.teamName}
         </span>
         <Button
-          styleType={applicationQuery.data.grades.graded && 'secondary'}
+          styleType={
+            applicationQuery.data.grades.graded ? 'secondary' : 'primary'
+          }
           onClick={() =>
             applicationMutation.mutate({
               id,
@@ -97,7 +99,7 @@ const ApplicationDetailsPage = () => {
       </div>
 
       <ApplicationQuestions
-        applicationId={id}
+        applicationId={id ?? 'No ID'}
         applicationQuery={applicationQuery}
         userData={user.data}
       />

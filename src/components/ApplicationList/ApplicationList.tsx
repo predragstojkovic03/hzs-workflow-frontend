@@ -23,6 +23,8 @@ const ApplicationList = ({ applications, showGraded }: any) => {
           teamName={item.teamName}
           captainPhone={item.firstMember.phoneNumber}
           captainEmail={item.firstMember.email}
+          moodlePoints={item.grades.moodle}
+          workshopPoints={item.grades.workshop}
           points={item.grades.gradeSum}
         />
       ))}

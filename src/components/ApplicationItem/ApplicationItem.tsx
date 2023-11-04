@@ -2,6 +2,13 @@ import { motion } from 'framer-motion';
 
 import styles from './ApplicationItem.module.css';
 import { useNavigate } from 'react-router-dom';
+import StateInput from '../Input/StateInput';
+import { Tooltip } from 'react-tooltip';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { gradeApplication } from '../../lib/api/applications';
+import { useUser } from '../../lib/auth';
+import { useEffect, useState } from 'react';
+import { ScaleLoader } from 'react-spinners';
 
 interface ApplicationItemProps {
   _id: any;
@@ -10,6 +17,8 @@ interface ApplicationItemProps {
   captainName: string;
   captainEmail?: string;
   captainPhone: string;
+  moodlePoints: number;
+  workshopPoints: number;
   points?: number | string;
 }
 
@@ -26,9 +35,42 @@ const ApplicationItem = ({
   captainName,
   captainEmail,
   captainPhone,
+  moodlePoints,
+  workshopPoints,
   points = '/',
 }: ApplicationItemProps) => {
   const navigate = useNavigate();
+
+  const user = useUser();
+
+  const [isTimeout, setIsTimeout] = useState(false);
+  const [moodleInput, setMoodleInput] = useState(moodlePoints);
+  const [workshopInput, setWorkshopInput] = useState(workshopPoints);
+
+  const queryClient = useQueryClient();
+
+  const applicationMutation = useMutation({
+    mutationKey: ['applications', _id],
+    mutationFn: gradeApplication,
+    onSettled: () => {
+      queryClient.invalidateQueries(['applications', _id]);
+      queryClient.invalidateQueries(['applications']);
+      setIsTimeout(false);
+    },
+  });
+
+  useEffect(() => {
+    setIsTimeout(true);
+    const timeout = setTimeout(() => {
+      applicationMutation.mutate({
+        id: _id,
+        grades: { moodle: moodleInput, workshop: workshopInput },
+        userData: user.data,
+      });
+    }, 1200);
+
+    return () => clearTimeout(timeout);
+  }, [moodleInput, workshopInput]);
 
   return (
     <motion.div
@@ -53,7 +95,29 @@ const ApplicationItem = ({
       </div>
       <div className={styles.element}>{captainPhone}</div>
       <div className={styles.element}>{captainEmail}</div>
-      <div className={`${styles.element} ${styles.points}`}>{points} poena</div>
+      <Tooltip id='moodle-tooltip' />
+      <div data-tooltip-id='moodle-tooltip' data-tooltip-content='Moodle'>
+        <StateInput
+          style={{ width: '100px' }}
+          onChange={(e) => setMoodleInput(Number(e.target.value))}
+          value={moodleInput}
+        />
+      </div>
+      <Tooltip id='workshops-tooltip' />
+      <div data-tooltip-id='workshops-tooltip' data-tooltip-content='Radionice'>
+        <StateInput
+          style={{ width: '100px' }}
+          onChange={(e) => setWorkshopInput(Number(e.target.value))}
+          value={workshopInput}
+        />
+      </div>
+      <div className={`${styles.element} ${styles.points}`}>
+        {isTimeout ? (
+          <ScaleLoader color='#fff' height={16} margin={2} loading radius={3} />
+        ) : (
+          <>{points} poena</>
+        )}
+      </div>
     </motion.div>
   );
 };

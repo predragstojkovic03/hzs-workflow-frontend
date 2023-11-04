@@ -16,7 +16,10 @@ export function getApplications(userData: UserData) {
   });
 }
 
-export function getApplicationById(id: any, userData: UserData) {
+export function getApplicationById(
+  id: any,
+  userData: UserData
+): Promise<Application> {
   const config = {
     headers: {
       'Content-Type': 'application/json',
