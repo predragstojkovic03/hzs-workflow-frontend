@@ -38,8 +38,11 @@ const ApplicationQuestions = ({
   const applicationMutation = useMutation({
     mutationKey: ['applications', applicationId],
     mutationFn: () => gradeApplication({ id: applicationId, grades, userData }),
-    onSettled: () =>
-      queryClient.invalidateQueries(['applications', applicationId]),
+    onSettled: () => {
+      queryClient.invalidateQueries(['applications']);
+      queryClient.refetchQueries(['applications']);
+      queryClient.invalidateQueries(['applications', applicationId]);
+    },
   });
 
   return (
@@ -96,6 +99,17 @@ const ApplicationQuestions = ({
       <ApplicationQuestion
         text='Goals'
         body={applicationQuery.data?.goals}
+        setGrades={setGrades}
+        grades={grades}
+        stateKey='goals'
+        onClick={() => applicationMutation.mutate()}
+        styles={styles}
+        isLoading={applicationMutation.isLoading}
+        isSuccess={applicationMutation.isSuccess}
+      />
+      <ApplicationQuestion
+        text='Team Members Description'
+        body={applicationQuery.data?.teamMembersDescription}
         setGrades={setGrades}
         grades={grades}
         stateKey='teamMembersDescription'

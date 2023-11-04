@@ -1,8 +1,10 @@
+// import { useMutation } from '@tanstack/react-query';
 import ApplicationItem from '../ApplicationItem/ApplicationItem';
 
 import styles from './ApplicationList.module.css';
+// import { gradeApplication } from '../../lib/api/applications';
 
-const ApplicationList = ({ applications, showGraded }: any) => {
+const ApplicationList = ({ applications, showGraded, isLoading }: any) => {
   let listedApplications = applications.sort(
     (a: Application, b: Application) => b.grades.gradeSum - a.grades.gradeSum
   );
@@ -11,6 +13,11 @@ const ApplicationList = ({ applications, showGraded }: any) => {
     listedApplications = listedApplications.filter(
       (item: Application) => !item.grades.graded
     );
+
+  // const applicationMutation = useMutation({
+  //   mutationKey: ['applications'],
+  //   mutationFn: gradeApplication,
+  // });
 
   return (
     <div className={styles.wrapper}>
@@ -26,6 +33,7 @@ const ApplicationList = ({ applications, showGraded }: any) => {
           moodlePoints={item.grades.moodle}
           workshopPoints={item.grades.workshop}
           points={item.grades.gradeSum}
+          isMainQueryLoading={isLoading}
         />
       ))}
     </div>

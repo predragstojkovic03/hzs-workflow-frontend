@@ -33,6 +33,7 @@ const Home = () => {
       <ApplicationList
         showGraded={showGraded}
         applications={applicationQuery.data}
+        isLoading={applicationQuery.isLoading}
       />
     </main>
   );
