@@ -79,3 +79,16 @@ export function setGradeStatus({ id, graded, userData }: any) {
     .put(`${apiUrl}/api/applications/${id}/grade-status`, body, config)
     .then((res) => res.data);
 }
+
+export function softDeleteApplication({ id, userData }: any) {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userData?.token ?? storage.getToken()}`,
+    },
+  };
+
+  return axios
+    .delete(`${apiUrl}/api/applications/${id}/`, config)
+    .then((res) => res.data);
+}

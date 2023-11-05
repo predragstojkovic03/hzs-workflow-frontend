@@ -22,6 +22,11 @@
   font-weight: 600;
 }
 
+.buttonsWrapper {
+  display: flex;
+  gap: 8px;
+}
+
 .info {
   margin-top: 24px;
 

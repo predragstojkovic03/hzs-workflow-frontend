@@ -14,6 +14,7 @@ interface ApplicationInfo {
 }
 
 interface Application {
+  deleted: boolean;
   _id: any;
   firstMember: TeamMember;
   secondMember: TeamMember;
