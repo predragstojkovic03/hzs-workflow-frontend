@@ -21,7 +21,7 @@
 
 .button:hover {
   background: var(--green-light);
-  box-shadow: #d329420d 0px 8px 24px;
+  /* box-shadow: #d329420d 0px 8px 24px; */
 }
 
 .button.disabled {
@@ -32,6 +32,15 @@
 .button.secondary {
   background: var(--gray);
   color: var(--dark-bg);
+}
+
+.button.purple {
+  color: white;
+  background: var(--purple);
+}
+
+.button:hover {
+  filter: brightness(1.05);
 }
 
 @media (max-width: 768px) {

@@ -20,6 +20,7 @@ interface ApplicationItemProps {
   moodlePoints: number;
   workshopPoints: number;
   points?: number | string;
+  isMainQueryLoading: boolean;
 }
 
 const spring = {
@@ -38,7 +39,8 @@ const ApplicationItem = ({
   moodlePoints,
   workshopPoints,
   points = '/',
-}: ApplicationItemProps) => {
+}: // isMainQueryLoading,
+ApplicationItemProps) => {
   const navigate = useNavigate();
 
   const user = useUser();
@@ -46,6 +48,7 @@ const ApplicationItem = ({
   const [isTimeout, setIsTimeout] = useState(false);
   const [moodleInput, setMoodleInput] = useState(moodlePoints);
   const [workshopInput, setWorkshopInput] = useState(workshopPoints);
+  // const isMounted = useRef(false);
 
   const queryClient = useQueryClient();
 
@@ -60,6 +63,10 @@ const ApplicationItem = ({
   });
 
   useEffect(() => {
+    // if (!isMounted.current) return;
+
+    // isMounted.current = true;
+
     setIsTimeout(true);
     const timeout = setTimeout(() => {
       applicationMutation.mutate({
