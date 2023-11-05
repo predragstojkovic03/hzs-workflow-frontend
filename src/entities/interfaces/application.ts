@@ -44,4 +44,9 @@ interface Application {
     primaryComment?: string;
     secondaryComment?: string;
   };
+  passedStages: {
+    application: boolean;
+    moodle: boolean;
+    workshop: boolean;
+  };
 }

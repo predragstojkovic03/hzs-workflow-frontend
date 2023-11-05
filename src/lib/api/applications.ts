@@ -92,3 +92,32 @@ export function softDeleteApplication({ id, userData }: any) {
     .delete(`${apiUrl}/api/applications/${id}/`, config)
     .then((res) => res.data);
 }
+
+export interface PassedStages {
+  moodle?: boolean;
+  workshop?: boolean;
+  application?: boolean;
+}
+
+export function setPassedStages({
+  id,
+  passedStages,
+  userData,
+}: {
+  id: any;
+  passedStages: PassedStages;
+  userData: any;
+}) {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userData?.token ?? storage.getToken()}`,
+    },
+  };
+
+  const body = passedStages;
+
+  return axios
+    .put(`${apiUrl}/api/applications/${id}/passed-stages`, body, config)
+    .then((res) => res.data);
+}
