@@ -9,6 +9,7 @@ import { gradeApplication } from '../../lib/api/applications';
 import { useUser } from '../../lib/auth';
 import { useEffect, useState } from 'react';
 import { ScaleLoader } from 'react-spinners';
+import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 
 interface ApplicationItemProps {
   _id: any;
@@ -21,6 +22,8 @@ interface ApplicationItemProps {
   workshopPoints: number;
   points?: number | string;
   isMainQueryLoading: boolean;
+  onSwitchToggle?: (value: boolean) => void;
+  switchActive?: boolean;
 }
 
 const spring = {
@@ -39,6 +42,8 @@ const ApplicationItem = ({
   moodlePoints,
   workshopPoints,
   points = '/',
+  onSwitchToggle,
+  switchActive,
 }: // isMainQueryLoading,
 ApplicationItemProps) => {
   const navigate = useNavigate();
@@ -125,6 +130,9 @@ ApplicationItemProps) => {
           <>{points} poena</>
         )}
       </div>
+      {onSwitchToggle && (
+        <ToggleSwitch onChange={onSwitchToggle} active={switchActive} />
+      )}
     </motion.div>
   );
 };

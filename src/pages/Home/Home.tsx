@@ -34,6 +34,7 @@ const Home = () => {
         showGraded={showGraded}
         applications={applicationQuery.data}
         isLoading={applicationQuery.isLoading}
+        toggleType='passedApplication'
       />
     </main>
   );
