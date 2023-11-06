@@ -6,6 +6,8 @@ import Home from './pages/Home/Home';
 import { useUser } from './lib/auth';
 import Sidebar from './components/Sidebar/Sidebar';
 import ApplicationDetails from './pages/ApplicationDetailsPage/ApplicationDetailsPage';
+import MoodlePage from './pages/MoodlePage/MoodlePage';
+import WorkshopPage from './pages/WorkshopPage/WorkshopPage';
 
 function App() {
   const user = useUser();
@@ -21,6 +23,22 @@ function App() {
             element={
               <RequireAuth>
                 <Home />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path='/moodle'
+            element={
+              <RequireAuth>
+                <MoodlePage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path='/radionice'
+            element={
+              <RequireAuth>
+                <WorkshopPage />
               </RequireAuth>
             }
           />

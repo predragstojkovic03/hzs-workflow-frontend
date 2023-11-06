@@ -11,7 +11,12 @@ interface ApplicationListProps {
   applications: Application[];
   showGraded: boolean;
   isLoading: boolean;
-  toggleType: 'passedApplication' | 'passedMoodle' | 'passedWorkshop' | 'none';
+  toggleType:
+    | 'passedApplication'
+    | 'passedMoodle'
+    | 'passedWorkshop'
+    | 'final'
+    | 'none';
 }
 
 const ApplicationList = ({
@@ -36,6 +41,28 @@ const ApplicationList = ({
           ? -1
           : 1
     );
+
+  if (toggleType === 'passedMoodle')
+    listedApplications = listedApplications
+      .sort((a: Application, b: Application) =>
+        a.passedStages.moodle === b.passedStages.moodle
+          ? 0
+          : a.passedStages.moodle
+          ? -1
+          : 1
+      )
+      .filter((application) => application.passedStages.application);
+
+  if (toggleType === 'passedWorkshop')
+    listedApplications = listedApplications
+      .sort((a: Application, b: Application) =>
+        a.passedStages.workshop === b.passedStages.workshop
+          ? 0
+          : a.passedStages.workshop
+          ? -1
+          : 1
+      )
+      .filter((application) => application.passedStages.moodle);
 
   if (!showGraded)
     listedApplications = listedApplications.filter(
@@ -73,6 +100,52 @@ const ApplicationList = ({
             );
           },
           toggleActive: application.passedStages.application,
+        };
+
+      case 'passedMoodle':
+        return {
+          onChange: (value: boolean) => {
+            applicationMutation.mutate(
+              {
+                id: application._id,
+                passedStages: { moodle: value },
+                userData: user.data,
+              },
+              {
+                onSettled: () => {
+                  queryClient.invalidateQueries(['applications']);
+                  queryClient.invalidateQueries([
+                    'applications',
+                    application._id,
+                  ]);
+                },
+              }
+            );
+          },
+          toggleActive: application.passedStages.moodle,
+        };
+
+      case 'passedWorkshop':
+        return {
+          onChange: (value: boolean) => {
+            applicationMutation.mutate(
+              {
+                id: application._id,
+                passedStages: { workshop: value },
+                userData: user.data,
+              },
+              {
+                onSettled: () => {
+                  queryClient.invalidateQueries(['applications']);
+                  queryClient.invalidateQueries([
+                    'applications',
+                    application._id,
+                  ]);
+                },
+              }
+            );
+          },
+          toggleActive: application.passedStages.workshop,
         };
     }
   };
