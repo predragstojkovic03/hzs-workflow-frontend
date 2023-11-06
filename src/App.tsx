@@ -8,6 +8,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import ApplicationDetails from './pages/ApplicationDetailsPage/ApplicationDetailsPage';
 import MoodlePage from './pages/MoodlePage/MoodlePage';
 import WorkshopPage from './pages/WorkshopPage/WorkshopPage';
+import UserDashboardPage from './pages/UserDashboardPage/UserDashboardPage';
 
 function App() {
   const user = useUser();
@@ -39,6 +40,14 @@ function App() {
             element={
               <RequireAuth>
                 <WorkshopPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path='/me'
+            element={
+              <RequireAuth>
+                <UserDashboardPage />
               </RequireAuth>
             }
           />

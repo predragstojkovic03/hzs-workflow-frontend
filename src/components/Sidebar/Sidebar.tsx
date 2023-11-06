@@ -125,8 +125,8 @@ const Sidebar = () => {
             type='gray'
             sidebarTextVisible={isOpen}
             icon={<BiUser />}
-            text={isOpen ? `${user.data.firstName}, Logout` : ''}
-            onClick={() => isOpen && logout.mutate({})}
+            text={isOpen ? `${user.data.firstName}, Dashboard` : ''}
+            onClick={() => navigate('/me')}
           />
         </div>
       )}

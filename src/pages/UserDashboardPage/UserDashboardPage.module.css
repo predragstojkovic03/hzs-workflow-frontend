@@ -1,0 +1,14 @@
+.heading {
+  font-size: 1.8rem;
+}
+
+.name {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.passwordFormWrapper {
+  width: 100%;
+  max-width: 400px;
+  margin-block: 24px 48px;
+}
