@@ -1,10 +1,8 @@
-import React from 'react';
 import { useLogout, useUser } from '../../lib/auth';
 
 type UserDashboardPageProps = {};
 
 import styles from './UserDashboardPage.module.css';
-import StateInput from '../../components/Input/StateInput';
 import ResetPasswordForm from '../../components/ResetPasswordForm/ResetPasswordForm';
 import Button from '../../components/Button/Button';
 
