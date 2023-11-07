@@ -11,7 +11,7 @@ import { MdSchool } from 'react-icons/md';
 
 import SidebarItem from '../SidebarItem/SidebarItem';
 import styles from './Sidebar.module.css';
-import { useLogout, useUser } from '../../lib/auth';
+import { useUser } from '../../lib/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
 
@@ -54,7 +54,6 @@ const Sidebar = () => {
   };
 
   const user = useUser();
-  const logout = useLogout();
   const navigate = useNavigate();
 
   const isHr = () => {
