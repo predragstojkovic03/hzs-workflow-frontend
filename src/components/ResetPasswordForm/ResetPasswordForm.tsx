@@ -23,7 +23,7 @@ const schema = yup
 
 type Props = {};
 
-const ResetPasswordForm = (props: Props) => {
+const ResetPasswordForm = ({}: Props) => {
   const [formStatus, setFormStatus] = useState<
     'idle' | 'loading' | 'success' | 'error'
   >('idle');
