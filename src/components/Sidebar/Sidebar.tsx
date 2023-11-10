@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 // import { IoStatsChart } from 'react-icons/io5';
 // import { BsPeopleFill } from 'react-icons/bs';
-// import { BsCheckLg } from 'react-icons/bs';
+import { BsPenFill } from 'react-icons/bs';
 import { FaHome } from 'react-icons/fa';
 // import { IoMdDoneAll } from 'react-icons/io';
 import { BiUser } from 'react-icons/bi';
 // import { AiFillStar } from 'react-icons/ai';
 import { motion } from 'framer-motion';
+import { MdSchool } from 'react-icons/md';
 
 import SidebarItem from '../SidebarItem/SidebarItem';
 import styles from './Sidebar.module.css';
-import { useLogout, useUser } from '../../lib/auth';
+import { useUser } from '../../lib/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
 
@@ -53,7 +54,6 @@ const Sidebar = () => {
   };
 
   const user = useUser();
-  const logout = useLogout();
   const navigate = useNavigate();
 
   const isHr = () => {
@@ -98,6 +98,24 @@ const Sidebar = () => {
             onClick={() => navigate('/')}
           />
         )}
+        {isHr() && (
+          <SidebarItem
+            i={2}
+            sidebarTextVisible={isOpen}
+            icon={<BsPenFill />}
+            text={isOpen ? 'Moodle' : ''}
+            onClick={() => navigate('/moodle')}
+          />
+        )}
+        {isHr() && (
+          <SidebarItem
+            i={3}
+            sidebarTextVisible={isOpen}
+            icon={<MdSchool />}
+            text={isOpen ? 'Radionice' : ''}
+            onClick={() => navigate('/radionice')}
+          />
+        )}
       </div>
       {user.data && (
         <div className={styles.logoutItemWrapper}>
@@ -106,8 +124,8 @@ const Sidebar = () => {
             type='gray'
             sidebarTextVisible={isOpen}
             icon={<BiUser />}
-            text={isOpen ? `${user.data.firstName}, Logout` : ''}
-            onClick={() => isOpen && logout.mutate({})}
+            text={isOpen ? `${user.data.firstName}, Dashboard` : ''}
+            onClick={() => navigate('/me')}
           />
         </div>
       )}

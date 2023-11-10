@@ -130,7 +130,7 @@ ApplicationItemProps) => {
           <>{points} poena</>
         )}
       </div>
-      {onSwitchToggle && (
+      {onSwitchToggle && user.data.role === 'superuser' && (
         <ToggleSwitch onChange={onSwitchToggle} active={switchActive} />
       )}
     </motion.div>

@@ -52,6 +52,20 @@ export async function register(registerData: RegisterCredentials) {
     .catch(handleError);
 }
 
+export async function changePassword(newPassword: string) {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${storage.getToken()}`,
+    },
+  };
+
+  return axios
+    .put(`${apiUrl}/api/users/change-password`, { newPassword }, config)
+    .then((res) => res.data)
+    .catch(handleError);
+}
+
 export async function logout() {
   storage.clearToken();
 }
