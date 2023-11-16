@@ -5,6 +5,8 @@ import ApplicationItem from '../ApplicationItem/ApplicationItem';
 
 import styles from './ApplicationList.module.css';
 import { useUser } from '../../lib/auth';
+import ExcelExport from '../ExcelExport/ExcelExport';
+import { generate } from 'generate-password-ts';
 // import { gradeApplication } from '../../lib/api/applications';
 
 interface ApplicationListProps {
@@ -85,7 +87,9 @@ const ApplicationList = ({
             applicationMutation.mutate(
               {
                 id: application._id,
-                passedStages: { application: value },
+                passedStages: value
+                  ? { application: true }
+                  : { application: false, moodle: false, workshop: false },
                 userData: user.data,
               },
               {
@@ -108,7 +112,9 @@ const ApplicationList = ({
             applicationMutation.mutate(
               {
                 id: application._id,
-                passedStages: { moodle: value },
+                passedStages: value
+                  ? { moodle: true }
+                  : { moodle: false, workshop: false },
                 userData: user.data,
               },
               {
@@ -150,8 +156,36 @@ const ApplicationList = ({
     }
   };
 
+  const getExportData = () => {
+    if (toggleType == 'passedApplication')
+      return listedApplications.filter(
+        (application) => application.passedStages.application
+      );
+
+    if (toggleType == 'passedMoodle')
+      return listedApplications.filter(
+        (application) => application.passedStages.moodle
+      );
+
+    if (toggleType == 'passedWorkshop')
+      return listedApplications.filter(
+        (application) => application.passedStages.workshop
+      );
+
+    return listedApplications;
+  };
+
   return (
     <div className={styles.wrapper}>
+      <ExcelExport
+        data={getExportData().map((application) => ({
+          teamName: application.teamName,
+          captainName: application.firstMember.name,
+          captainEmail: application.firstMember.email,
+          moodlePassword: generate({ length: 10 }),
+        }))}
+        fileName={toggleType}
+      />
       {listedApplications.map((item: Application, i: number) => (
         <ApplicationItem
           _id={item._id}
