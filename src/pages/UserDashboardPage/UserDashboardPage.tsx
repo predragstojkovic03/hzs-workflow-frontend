@@ -16,7 +16,7 @@ const UserDashboardPage = ({}: UserDashboardPageProps) => {
         Helou,{' '}
         <span
           className={styles.name}
-        >{`${user.data.firstName} ${user.data.lastName}`}</span>
+        >{`${user.data?.firstName} ${user.data?.lastName}`}</span>
       </div>
 
       <div className={styles.passwordFormWrapper}>

@@ -5,6 +5,8 @@ import ApplicationItem from '../ApplicationItem/ApplicationItem';
 
 import styles from './ApplicationList.module.css';
 import { useUser } from '../../lib/auth';
+import ExcelExport from '../ExcelExport/ExcelExport';
+import { generate } from 'generate-password-ts';
 // import { gradeApplication } from '../../lib/api/applications';
 
 interface ApplicationListProps {
@@ -85,7 +87,9 @@ const ApplicationList = ({
             applicationMutation.mutate(
               {
                 id: application._id,
-                passedStages: { application: value },
+                passedStages: value
+                  ? { application: true }
+                  : { application: false, moodle: false, workshop: false },
                 userData: user.data,
               },
               {
@@ -108,7 +112,9 @@ const ApplicationList = ({
             applicationMutation.mutate(
               {
                 id: application._id,
-                passedStages: { moodle: value },
+                passedStages: value
+                  ? { moodle: true }
+                  : { moodle: false, workshop: false },
                 userData: user.data,
               },
               {
@@ -150,8 +156,85 @@ const ApplicationList = ({
     }
   };
 
+  const getExportData = () => {
+    if (toggleType == 'passedApplication')
+      return listedApplications.filter(
+        (application) => application.passedStages.application
+      );
+
+    if (toggleType == 'passedMoodle')
+      return listedApplications.filter(
+        (application) => application.passedStages.moodle
+      );
+
+    if (toggleType == 'passedWorkshop')
+      return listedApplications.filter(
+        (application) => application.passedStages.workshop
+      );
+
+    return listedApplications;
+  };
+
+  const getNotPassedExportData = () => {
+    if (toggleType == 'passedApplication')
+      return listedApplications.filter(
+        (application) => !application.passedStages.application
+      );
+
+    if (toggleType == 'passedMoodle')
+      return listedApplications.filter(
+        (application) => !application.passedStages.moodle
+      );
+
+    if (toggleType == 'passedWorkshop')
+      return listedApplications.filter(
+        (application) => !application.passedStages.workshop
+      );
+
+    return listedApplications;
+  };
+
+  const getFileName = (passed: boolean) => {
+    switch (toggleType) {
+      case 'passedApplication':
+        return passed ? 'Prosli prijavu' : 'Nisu prosli prijavu';
+
+      case 'passedMoodle':
+        return passed ? 'Prosli moodle' : 'Nisu prosli moodle';
+
+      case 'passedWorkshop':
+        return passed ? 'Prosli domaci' : 'Nisu prosli domaci';
+    }
+
+    return 'Podaci';
+  };
+
   return (
     <div className={styles.wrapper}>
+      <div className={styles.exportWrapper}>
+        <ExcelExport
+          data={getExportData().map((application) => ({
+            ['Ime tima']: application.teamName,
+            ['Ime kapitena']: application.firstMember.name,
+            ['Mejl kapitena']: application.firstMember.email,
+            ['Broj telefona kapitena']: application.firstMember.phoneNumber,
+            ['Moodle lozinka']: generate({ length: 10 }),
+          }))}
+          fileName={getFileName(true)}
+          type='passed'
+        />
+        <ExcelExport
+          data={getNotPassedExportData().map((application) => ({
+            ['Ime tima']: application.teamName,
+            ['Ime kapitena']: application.firstMember.name,
+            ['Mejl kapitena']: application.firstMember.email,
+            ['Broj telefona kapitena']: application.firstMember.phoneNumber,
+            // moodlePassword: generate({ length: 10 }),
+          }))}
+          fileName={getFileName(false)}
+          type='notPassed'
+        />
+      </div>
       {listedApplications.map((item: Application, i: number) => (
         <ApplicationItem
           _id={item._id}
