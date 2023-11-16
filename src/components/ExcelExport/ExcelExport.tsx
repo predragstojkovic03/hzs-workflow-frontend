@@ -5,10 +5,11 @@ import { FaFileExcel } from 'react-icons/fa';
 
 interface ExcelExportProps {
   data: {
-    teamName: string;
-    captainName: string;
-    captainEmail: string;
-    moodlePassword?: string;
+    ['Ime tima']: string;
+    ['Ime kapitena']: string;
+    ['Mejl kapitena']: string;
+    ['Broj telefona kapitena']: string;
+    ['Moodle lozinlka']?: string;
   }[];
   fileName: string;
   type: 'passed' | 'notPassed';

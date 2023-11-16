@@ -214,19 +214,21 @@ const ApplicationList = ({
       <div className={styles.exportWrapper}>
         <ExcelExport
           data={getExportData().map((application) => ({
-            teamName: application.teamName,
-            captainName: application.firstMember.name,
-            captainEmail: application.firstMember.email,
-            moodlePassword: generate({ length: 10 }),
+            ['Ime tima']: application.teamName,
+            ['Ime kapitena']: application.firstMember.name,
+            ['Mejl kapitena']: application.firstMember.email,
+            ['Broj telefona kapitena']: application.firstMember.phoneNumber,
+            ['Moodle lozinka']: generate({ length: 10 }),
           }))}
           fileName={getFileName(true)}
           type='passed'
         />
         <ExcelExport
           data={getNotPassedExportData().map((application) => ({
-            teamName: application.teamName,
-            captainName: application.firstMember.name,
-            captainEmail: application.firstMember.email,
+            ['Ime tima']: application.teamName,
+            ['Ime kapitena']: application.firstMember.name,
+            ['Mejl kapitena']: application.firstMember.email,
+            ['Broj telefona kapitena']: application.firstMember.phoneNumber,
             // moodlePassword: generate({ length: 10 }),
           }))}
           fileName={getFileName(false)}
