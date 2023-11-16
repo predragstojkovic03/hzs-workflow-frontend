@@ -64,29 +64,31 @@ const ApplicationDetailsPage = () => {
           {applicationQuery.data.teamName}
         </span>
         <div className={styles.buttonsWrapper}>
-          <Button
-            styleType={applicationQuery.data.deleted ? 'secondary' : 'purple'}
-            onClick={() =>
-              deleteMutation.mutate({
-                id,
-                userData: user.data,
-              })
-            }
-          >
-            {deleteMutation.isLoading ? (
-              <ScaleLoader
-                color='var(--dark-bg)'
-                height={12}
-                margin={1}
-                loading
-                radius={5}
-              />
-            ) : applicationQuery.data.deleted ? (
-              'Vrati'
-            ) : (
-              'Obrisi'
-            )}
-          </Button>
+          {user.data?.role === 'superuser' && (
+            <Button
+              styleType={applicationQuery.data.deleted ? 'secondary' : 'purple'}
+              onClick={() =>
+                deleteMutation.mutate({
+                  id,
+                  userData: user.data,
+                })
+              }
+            >
+              {deleteMutation.isLoading ? (
+                <ScaleLoader
+                  color='var(--dark-bg)'
+                  height={12}
+                  margin={1}
+                  loading
+                  radius={5}
+                />
+              ) : applicationQuery.data.deleted ? (
+                'Vrati'
+              ) : (
+                'Obrisi'
+              )}
+            </Button>
+          )}
           <Button
             styleType={
               applicationQuery.data.grades.graded ? 'secondary' : 'primary'
