@@ -7,7 +7,7 @@ import { Tooltip } from 'react-tooltip';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { gradeApplication } from '../../lib/api/applications';
 import { useUser } from '../../lib/auth';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ScaleLoader } from 'react-spinners';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 
@@ -53,6 +53,7 @@ ApplicationItemProps) => {
   const [isTimeout, setIsTimeout] = useState(false);
   const [moodleInput, setMoodleInput] = useState(moodlePoints);
   const [workshopInput, setWorkshopInput] = useState(workshopPoints);
+  const [timer, setTimer] = useState<any>(null);
   // const isMounted = useRef(false);
 
   const queryClient = useQueryClient();
@@ -67,22 +68,38 @@ ApplicationItemProps) => {
     },
   });
 
-  useEffect(() => {
-    // if (!isMounted.current) return;
+  // useDidMountEffect(() => {
+  //   // if (!isMounted.current) return;
 
-    // isMounted.current = true;
+  //   // isMounted.current = true;
 
+  //   setIsTimeout(true);
+  //   const timeout = setTimeout(() => {
+  //     applicationMutation.mutate({
+  //       id: _id,
+  //       grades: { moodle: moodleInput, workshop: workshopInput },
+  //       userData: user.data,
+  //     });
+  //   }, 1200);
+
+  //   return () => clearTimeout(timeout);
+  // }, [moodleInput, workshopInput]);
+
+  const handleInputChange = (moodle: number, workshop: number) => {
     setIsTimeout(true);
-    const timeout = setTimeout(() => {
+
+    clearTimeout(timer);
+
+    const newTimer = setTimeout(() => {
       applicationMutation.mutate({
         id: _id,
-        grades: { moodle: moodleInput, workshop: workshopInput },
+        grades: { moodle, workshop },
         userData: user.data,
       });
     }, 1200);
 
-    return () => clearTimeout(timeout);
-  }, [moodleInput, workshopInput]);
+    setTimer(newTimer);
+  };
 
   return (
     <motion.div
@@ -111,7 +128,10 @@ ApplicationItemProps) => {
       <div data-tooltip-id='moodle-tooltip' data-tooltip-content='Moodle'>
         <StateInput
           style={{ width: '100px' }}
-          onChange={(e) => setMoodleInput(Number(e.target.value))}
+          onChange={(e) => {
+            setMoodleInput(Number(e.target.value));
+            handleInputChange(Number(e.target.value), workshopInput);
+          }}
           value={moodleInput}
         />
       </div>
@@ -119,7 +139,10 @@ ApplicationItemProps) => {
       <div data-tooltip-id='workshops-tooltip' data-tooltip-content='Radionice'>
         <StateInput
           style={{ width: '100px' }}
-          onChange={(e) => setWorkshopInput(Number(e.target.value))}
+          onChange={(e) => {
+            setWorkshopInput(Number(e.target.value));
+            handleInputChange(moodleInput, Number(e.target.value));
+          }}
           value={workshopInput}
         />
       </div>
