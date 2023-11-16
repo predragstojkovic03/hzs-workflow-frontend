@@ -4,3 +4,8 @@
   gap: 16px;
   overflow-x: auto;
 }
+
+.exportWrapper {
+  display: flex;
+  gap: 16px;
+}
