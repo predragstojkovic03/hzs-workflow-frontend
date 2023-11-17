@@ -28,6 +28,7 @@ interface Application {
   situational: string;
   goals: string;
   teamMembersDescription: string;
+  moodlePassword: string;
   grades: {
     graded: boolean;
     experience: number;

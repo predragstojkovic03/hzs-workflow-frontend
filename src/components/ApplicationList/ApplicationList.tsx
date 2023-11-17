@@ -6,7 +6,7 @@ import ApplicationItem from '../ApplicationItem/ApplicationItem';
 import styles from './ApplicationList.module.css';
 import { useUser } from '../../lib/auth';
 import ExcelExport from '../ExcelExport/ExcelExport';
-import { generate } from 'generate-password-ts';
+
 // import { gradeApplication } from '../../lib/api/applications';
 
 interface ApplicationListProps {
@@ -218,7 +218,7 @@ const ApplicationList = ({
             ['Ime kapitena']: application.firstMember.name,
             ['Mejl kapitena']: application.firstMember.email,
             ['Broj telefona kapitena']: application.firstMember.phoneNumber,
-            ['Moodle lozinka']: generate({ length: 10 }),
+            ['Moodle lozinka']: application.moodlePassword,
           }))}
           fileName={getFileName(true)}
           type='passed'
@@ -229,7 +229,6 @@ const ApplicationList = ({
             ['Ime kapitena']: application.firstMember.name,
             ['Mejl kapitena']: application.firstMember.email,
             ['Broj telefona kapitena']: application.firstMember.phoneNumber,
-            // moodlePassword: generate({ length: 10 }),
           }))}
           fileName={getFileName(false)}
           type='notPassed'
