@@ -124,8 +124,11 @@ ApplicationItemProps) => {
       </div>
       <div className={styles.element}>{captainPhone}</div>
       <div className={styles.element}>{captainEmail}</div>
-      <Tooltip id='moodle-tooltip' />
-      <div data-tooltip-id='moodle-tooltip' data-tooltip-content='Moodle'>
+      <Tooltip id={`moodle-tooltip-${_id}`} />
+      <div
+        data-tooltip-id={`moodle-tooltip-${_id}`}
+        data-tooltip-content='Moodle'
+      >
         <StateInput
           style={{ width: '100px' }}
           onChange={(e) => {
@@ -135,8 +138,11 @@ ApplicationItemProps) => {
           value={moodleInput}
         />
       </div>
-      <Tooltip id='workshops-tooltip' />
-      <div data-tooltip-id='workshops-tooltip' data-tooltip-content='Radionice'>
+      <Tooltip id={`workshops-tooltip-${_id}`} />
+      <div
+        data-tooltip-id={`workshops-tooltip-${_id}`}
+        data-tooltip-content='Radionice'
+      >
         <StateInput
           style={{ width: '100px' }}
           onChange={(e) => {
